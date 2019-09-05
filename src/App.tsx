@@ -5,22 +5,25 @@ import Select from "./components/select/select";
 import { useFetch } from "./hooks/fetch.hooks";
 import { useDate } from "./hooks/dateNow.hooks";
 import { SORT_TYPES } from "./components/select/select.types";
+import { useLoading } from "./hooks/loading.hooks";
+import Loading from "./components/loading/loading";
 
 function App() {
   const { sort, onChangeSort } = useSorting(SORT_TYPES.UNSORTED);
-  const result = useFetch(sort);
+  const { data, isLoading } = useFetch(sort);
   const dateNow = useDate();
 
   return (
     <div className="App">
       <Select sort={sort} onChangeSort={onChangeSort} />
+      {isLoading ? <Loading /> : null}
       <div
         style={{
           display: "flex",
           flexWrap: "wrap"
         }}
       >
-        {result.map(value => (
+        {data.map(value => (
           <div
             key={value.id}
             style={{
@@ -40,7 +43,7 @@ function App() {
               Face: {value.face}
             </div>
 
-            <div>Price: {value.price}</div>
+            <div>Price: ${value.price / 100}</div>
             <div>Date Added: {formatDate(value.date, dateNow)}</div>
           </div>
         ))}
