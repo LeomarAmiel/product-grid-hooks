@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
-
-interface IProduct {
-  id: string;
-  size: number;
-  price: number;
-  face: string;
-  date: string;
-}
+import { useSorting } from "./hooks/sort.hooks";
+import Select from "./components/select/select";
+import { useFetch } from "./hooks/fetch.hooks";
+import { useDate } from "./hooks/dateNow.hooks";
+import { SORT_TYPES } from "./components/select/select.types";
 
 function App() {
-  const result = useFetch();
+  const { sort, onChangeSort } = useSorting(SORT_TYPES.UNSORTED);
+  const result = useFetch(sort);
+  const dateNow = useDate();
 
   return (
     <div className="App">
-      <select>
-        <option value="dog">Size</option>
-        <option value="cat">Price</option>
-        <option value="hamster">ID</option>
-      </select>
+      <Select sort={sort} onChangeSort={onChangeSort} />
       <div
         style={{
           display: "flex",
@@ -33,7 +28,8 @@ function App() {
               height: "120px",
               display: "flex",
               flexDirection: "column",
-              flex: "0 0 33%"
+              flex: "0 0 33%",
+              textAlign: "left"
             }}
           >
             <div
@@ -45,23 +41,41 @@ function App() {
             </div>
 
             <div>Price: {value.price}</div>
-            <div>Date Added: {value.date}</div>
+            <div>Date Added: {formatDate(value.date, dateNow)}</div>
           </div>
         ))}
       </div>
     </div>
   );
 }
-function useFetch(): IProduct[] {
-  const [data, updateData] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/products").then(res =>
-      res.json().then(data => updateData(data))
-    );
-  }, []);
+function formatDate(date: string, dateNow: Date) {
+  const now = dateNow.getTime() / 1000;
+  const newDate = new Date(date).getTime() / 1000;
+  const secondsFromNow = now - newDate;
 
-  return data;
+  if (
+    Math.ceil(secondsFromNow / 3600) >= 24 ||
+    (secondsFromNow >= 86400 && secondsFromNow < 604800)
+  ) {
+    const isOneDay =
+      Math.ceil(secondsFromNow / 3600) >= 24 ||
+      Math.ceil(secondsFromNow / 86400) === 1;
+    return `${isOneDay ? "1" : Math.ceil(secondsFromNow / 86400)} ${
+      isOneDay ? "day" : "days"
+    } ago`;
+  }
+  if (secondsFromNow >= 3600 && secondsFromNow < 86400) {
+    return `${Math.ceil(secondsFromNow / 3600)} hours ago`;
+  }
+  if (secondsFromNow >= 60 && secondsFromNow < 3600) {
+    return `${Math.ceil(secondsFromNow / 60)} minutes ago`;
+  }
+  if (secondsFromNow < 60) {
+    return `${Math.ceil(secondsFromNow)} seconds ago`;
+  }
+
+  return date;
 }
 
 export default App;
