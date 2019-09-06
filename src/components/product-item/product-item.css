@@ -1,0 +1,18 @@
+.products-list--item {
+  border: 1px solid black;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(50% - 2px);
+  text-align: left;
+  justify-content: space-around;
+}
+
+.products-list--item--wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-around;
+  padding-left: 12px;
+}
