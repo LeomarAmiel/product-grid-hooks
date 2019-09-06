@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { SortTypes } from "../components/select/select.types";
-import { useLoading } from "./loading.hooks";
 
 export interface IProduct {
   id: string;
@@ -17,7 +16,7 @@ interface IFetchValues {
 
 export function useFetch(sort: SortTypes): IFetchValues {
   const [data, updateData] = useState([]);
-  const { isLoading, setIsLoading } = useLoading(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);

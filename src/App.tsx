@@ -1,11 +1,8 @@
 import React from "react";
 import "./App.css";
-import { useSorting } from "./hooks/sort.hooks";
 import Select from "./components/select/select";
-import { useFetch } from "./hooks/fetch.hooks";
-import { useDate } from "./hooks/dateNow.hooks";
+import { useSorting, useFetch, useDate } from "./hooks";
 import { SORT_TYPES } from "./components/select/select.types";
-import { useLoading } from "./hooks/loading.hooks";
 import Loading from "./components/loading/loading";
 
 function App() {
