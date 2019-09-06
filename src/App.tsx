@@ -9,42 +9,58 @@ function App() {
   const { sort, onChangeSort } = useSorting(SORT_TYPES.UNSORTED);
   const { data, isLoading } = useFetch(sort);
   const dateNow = useDate();
-
   return (
     <div className="App">
       <Select sort={sort} onChangeSort={onChangeSort} />
       {isLoading ? <Loading /> : null}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap"
-        }}
-      >
-        {data.map(value => (
-          <div
-            key={value.id}
-            style={{
-              border: "1px solid black",
-              height: "120px",
-              display: "flex",
-              flexDirection: "column",
-              flex: "0 0 33%",
-              textAlign: "left"
-            }}
-          >
-            <div
-              style={{
-                fontSize: value.size
-              }}
-            >
-              Face: {value.face}
-            </div>
+      <ul className="products-list">
+        {data.map((value, index) => {
+          if ((index + 1) % 20 === 0) {
+            return (
+              <>
+                <li key={value.id} className="products-list--item">
+                  <div className="products-list--item--wrapper">
+                    <div
+                      style={{
+                        fontSize: value.size
+                      }}
+                    >
+                      Face: {value.face}
+                    </div>
 
-            <div>Price: ${value.price / 100}</div>
-            <div>Date Added: {formatDate(value.date, dateNow)}</div>
-          </div>
-        ))}
-      </div>
+                    <div>Price: ${value.price / 100}</div>
+                    <div>Date Added: {formatDate(value.date, dateNow)}</div>
+                  </div>
+                </li>
+                <aside className="aside" key={`ad${value.id}`}>
+                  <img
+                    alt="Ad from sponsor"
+                    src={`http://localhost:5000/ads/?r=${Math.floor(
+                      Math.random() * 1000
+                    )}`}
+                  />
+                </aside>
+              </>
+            );
+          }
+          return (
+            <li key={value.id} className="products-list--item">
+              <div className="products-list--item--wrapper">
+                <div
+                  style={{
+                    fontSize: value.size
+                  }}
+                >
+                  Face: {value.face}
+                </div>
+
+                <div>Price: ${value.price / 100}</div>
+                <div>Date Added: {formatDate(value.date, dateNow)}</div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

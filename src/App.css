@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
 .App-logo {
@@ -30,4 +31,34 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.products-list--item {
+  border: 1px solid black;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc(50% - 2px);
+  text-align: left;
+  justify-content: space-around;
+}
+
+.products-list--item--wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-around;
+  padding-left: 12px;
+}
+
+.aside {
+  display: block;
+  width: 100%;
 }
