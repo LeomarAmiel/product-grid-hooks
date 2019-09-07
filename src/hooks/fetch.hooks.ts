@@ -14,18 +14,20 @@ interface IFetchValues {
   isLoading: boolean;
 }
 
-export function useFetch(sort: SortTypes): IFetchValues {
+export function useFetch(sort: SortTypes, page: number = 1): IFetchValues {
   const [data, updateData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `http://localhost:5000/products${Boolean(sort) ? `?_sort=${sort}` : ""}`
+      `http://localhost:5000/products?_page=${page}&_limit=20 ${
+        Boolean(sort) ? `&_sort=${sort}` : ""
+      }`
     )
       .then(res => res.json().then(data => updateData(data)))
       .finally(() => setIsLoading(false));
-  }, [sort]);
+  }, [sort, page]);
 
   return { isLoading, data };
 }
