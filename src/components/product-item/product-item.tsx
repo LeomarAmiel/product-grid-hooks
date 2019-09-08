@@ -10,13 +10,7 @@ export interface IProductItemProps {
   dateNow: Date;
 }
 
-export default function ProductItem({
-  size,
-  face,
-  date,
-  price,
-  dateNow
-}: IProductItemProps) {
+function ProductItem({ size, face, date, price, dateNow }: IProductItemProps) {
   return (
     <li className="products-list--item">
       <div className="products-list--item--wrapper">
@@ -34,3 +28,5 @@ export default function ProductItem({
     </li>
   );
 }
+
+export default React.memo(ProductItem);

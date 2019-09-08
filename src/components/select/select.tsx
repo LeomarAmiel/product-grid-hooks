@@ -21,4 +21,4 @@ function Select({ sort, onChangeSort }: IProps) {
   );
 }
 
-export default Select;
+export default React.memo(Select);
