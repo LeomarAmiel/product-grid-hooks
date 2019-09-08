@@ -2,3 +2,11 @@
   display: inline;
   padding-right: 8px;
 }
+
+.sort-wrapper {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 25px;
+  border-bottom: 1px solid black;
+}

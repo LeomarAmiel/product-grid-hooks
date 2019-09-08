@@ -9,7 +9,7 @@ interface IProps {
 
 function Select({ sort, onChangeSort }: IProps) {
   return (
-    <>
+    <div className="sort-wrapper">
       <h2 className="sort-header">Sorting:</h2>
       <select multiple={false} value={sort} onChange={onChangeSort}>
         <option value={SORT_TYPES.UNSORTED}>--</option>
@@ -17,7 +17,7 @@ function Select({ sort, onChangeSort }: IProps) {
         <option value={SORT_TYPES.PRICE}>Price</option>
         <option value={SORT_TYPES.ID}>ID</option>
       </select>
-    </>
+    </div>
   );
 }
 

@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
+import { IProductItemProps } from "./product-item";
 import "./product-item.css";
+import { useIntersection } from "../../hooks";
 import { formatDate } from "../../utils";
 
-export interface IProductItemProps {
-  size: number;
-  price: number;
-  face: string;
-  date: string;
-  dateNow: Date;
-}
-
-export default function ProductItem({
+export default function IntersectProductItem({
   size,
   face,
   date,
   price,
   dateNow
 }: IProductItemProps) {
+  const elementRef = useRef(null);
+  const { intersectionEntry } = useIntersection({
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+    elementRef
+  });
+  console.log("intersectionEntry: ", intersectionEntry);
   return (
-    <li className="products-list--item">
+    <li ref={elementRef} className="products-list--item">
       <div className="products-list--item--wrapper">
         <div
           style={{
