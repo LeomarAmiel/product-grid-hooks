@@ -15,7 +15,7 @@ interface IFetchValues {
 }
 
 export function useFetch(sort: SortTypes, page: number = 1): IFetchValues {
-  const [data, updateData] = useState([]);
+  const [data, updateData] = useState([] as IProduct[]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,13 @@ export function useFetch(sort: SortTypes, page: number = 1): IFetchValues {
         Boolean(sort) ? `&_sort=${sort}` : ""
       }`
     )
-      .then(res => res.json().then(data => updateData(data)))
+      .then(res =>
+        res
+          .json()
+          .then((newData: IProduct[]) =>
+            updateData(data => [...data, ...newData])
+          )
+      )
       .finally(() => setIsLoading(false));
   }, [sort, page]);
 

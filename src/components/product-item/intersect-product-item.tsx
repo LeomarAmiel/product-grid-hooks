@@ -1,22 +1,39 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { IProductItemProps } from "./product-item";
 import "./product-item.css";
 import { useIntersection } from "../../hooks";
 import { formatDate } from "../../utils";
+
+export interface IProps extends IProductItemProps {
+  onHandleHasSeenItem: Dispatch<SetStateAction<number>>;
+  pageValue: number;
+  intersectionIndex: number;
+}
 
 export default function IntersectProductItem({
   size,
   face,
   date,
   price,
-  dateNow
-}: IProductItemProps) {
+  dateNow,
+  pageValue,
+  intersectionIndex,
+  onHandleHasSeenItem
+}: IProps) {
   const elementRef = useRef(null);
   const { intersectionEntry } = useIntersection({
     threshold: [0, 0.25, 0.5, 0.75, 1],
     elementRef
   });
-  console.log("intersectionEntry: ", intersectionEntry);
+  useEffect(() => {
+    if (
+      intersectionEntry.intersectionRatio > 0.5 &&
+      pageValue === intersectionIndex
+    ) {
+      onHandleHasSeenItem(pageValue + 1);
+    }
+  }, [intersectionEntry.intersectionRatio]);
+
   return (
     <li ref={elementRef} className="products-list--item">
       <div className="products-list--item--wrapper">

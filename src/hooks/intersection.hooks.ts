@@ -7,13 +7,19 @@ interface Props {
   elementRef: MutableRefObject<Element | null>;
 }
 
+interface ReturnType {
+  intersectionEntry: IntersectionObserverEntry;
+}
+
 export function useIntersection({
   root = null,
   rootMargin,
   threshold = 0,
   elementRef
-}: Props) {
-  const [intersectionEntry, updateEntry] = useState({});
+}: Props): ReturnType {
+  const [intersectionEntry, updateEntry] = useState(
+    {} as IntersectionObserverEntry
+  );
 
   const observer = useRef(
     new window.IntersectionObserver(([entry]) => updateEntry(entry), {

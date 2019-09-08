@@ -6,10 +6,12 @@ interface IProps {
   src: string;
 }
 
-export default function Ads({ id, src }: IProps) {
+function Ads({ id, src }: IProps) {
   return (
     <aside className="aside" key={`ad${id}`}>
       <img alt="Ad from sponsor" src={src} />
     </aside>
   );
 }
+
+export default React.memo(Ads);
