@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import "./loading.css";
 
 function Loading() {
-  const [dots, setDots] = useState(1);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (dots === 3) {
-        return setDots(1);
-      }
-      return setDots(dots + 1);
-    }, 200);
-    return () => {
-      clearInterval(interval);
-    };
-  });
-
   return (
-    <div>
-      <p>Loading{".".repeat(dots)}</p>
+    <div className="loading-wrapper">
+      <div className="loading-circle" />
+      <p>Loading</p>
     </div>
   );
 }

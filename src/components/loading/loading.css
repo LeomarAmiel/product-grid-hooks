@@ -1,0 +1,28 @@
+.loading-circle {
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+  border-right-color: white;
+  height: 28px;
+  width: 28px;
+  margin-right: 10px;
+  animation: rotatecircle 1s infinite linear;
+}
+
+.loading-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@keyframes rotatecircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
