@@ -25,14 +25,21 @@ export default function IntersectProductItem({
     threshold: [0, 0.25, 0.5, 0.75, 1],
     elementRef
   });
+
   useEffect(() => {
     if (
       intersectionEntry.intersectionRatio > 0.5 &&
       pageValue === intersectionIndex
     ) {
-      onHandleHasSeenItem(pageValue + 1);
+      return onHandleHasSeenItem(pageValue + 1);
     }
-  }, [intersectionEntry.intersectionRatio]);
+  }, [
+    intersectionEntry.intersectionRatio,
+    // seems like they are unnecessary to add them as deps to useEffect as I don't want them to run when it but to satisfy the linter for now
+    pageValue,
+    intersectionIndex,
+    onHandleHasSeenItem
+  ]);
 
   return (
     <li ref={elementRef} className="products-list--item">

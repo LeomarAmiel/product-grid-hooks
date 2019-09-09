@@ -9,8 +9,8 @@ interface IItem extends IProps {
 
 export default function Item({ hasIntersect, ...props }: IItem) {
   return hasIntersect ? (
-    <ProductItem {...props} />
-  ) : (
     <IntersectProductItem {...props} />
+  ) : (
+    <ProductItem {...props} />
   );
 }
