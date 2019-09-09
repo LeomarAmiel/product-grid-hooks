@@ -7,7 +7,10 @@ import "./App.css";
 function App() {
   const [page, setPage] = useState(1);
   const { sort, onChangeSort } = useSorting(SORT_TYPES.UNSORTED);
-  const { data, isLoading } = useFetch(sort, page);
+  const { data, isLoading } = useFetch({
+    sort,
+    page
+  });
   const dateNow = useDate();
   return (
     <div className="App">
@@ -15,7 +18,7 @@ function App() {
       <ul className="products-list" id="products-list">
         {data.map((value, index) => {
           return (
-            <Fragment key={value.id}>
+            <Fragment key={`${value.id}-${index}`}>
               <ProductItem
                 {...value}
                 dateNow={dateNow}
@@ -35,7 +38,7 @@ function App() {
             </Fragment>
           );
         })}
-        {isLoading && data.length !== 0 ? <Loading /> : null}
+        {isLoading ? <Loading /> : null}
       </ul>
     </div>
   );
