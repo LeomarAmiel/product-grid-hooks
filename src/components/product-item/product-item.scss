@@ -3,9 +3,12 @@
   height: 140px;
   display: flex;
   flex-direction: column;
-  flex: 0 0 calc(50% - 2px);
   text-align: left;
   justify-content: space-around;
+  flex: 0 0 calc(50% - 2px);
+  @media (max-width: 768px) {
+    flex: 1 0 100%;
+  }
 }
 
 .products-list--item--wrapper {

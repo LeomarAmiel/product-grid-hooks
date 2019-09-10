@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { IProductItemProps } from "./product-item";
-import "./product-item.css";
 import { useIntersection } from "../../hooks";
 import { formatDate } from "../../utils";
+import "./product-item.scss";
 
 export interface IProps extends IProductItemProps {
   onHandleHasSeenItem: Dispatch<SetStateAction<number>>;

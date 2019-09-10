@@ -1,6 +1,6 @@
 import React from "react";
-import "./product-item.css";
 import { formatDate } from "../../utils";
+import "./product-item.scss";
 
 export interface IProductItemProps {
   size: number;
