@@ -18,6 +18,8 @@ export function useAds(page: number) {
       newAd = Math.floor(Math.random() * 1000);
     } while (ads.includes(newAd));
     setAds(oldAds => [...oldAds, newAd]);
+    // we wouldn't want for this to run whenver the ads change
+    // eslint-disable-next-line
   }, [page]);
 
   return { ads };
