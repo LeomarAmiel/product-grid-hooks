@@ -17,5 +17,14 @@ I've finished a products grid using only hooks!
 
 ## What's next
 
-- Add media queries for it to work on mobile/tablet browsers
-- Create this version in React Native
+- Create a version in React Native
+
+## What I've learned
+
+- Hooks? Gud. Anyway, I've done hooks here. Extensively using useEffect and getting it's quirks. Also useRef is good!
+- Intersection observer might have been one of the hardest things here. Once you dip your foot in it though, you can get how it works!
+- Can't use @media in .css? I am not sure yet but I had a problem awhile ago (September 10, 2:02 PM) with it!
+
+## How to run
+
+Run `yarn develop`
