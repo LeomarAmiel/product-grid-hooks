@@ -1,10 +1,11 @@
 import React from "react";
+import LoadingCircle from "./loading-circle";
 import "./loading.css";
 
 function Loading() {
   return (
     <div className="loading-wrapper">
-      <div className="loading-circle" />
+      <LoadingCircle />
       <p>Loading</p>
     </div>
   );

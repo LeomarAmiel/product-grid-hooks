@@ -15,7 +15,13 @@ function App() {
   const dateNow = useDate();
   return (
     <div className="App">
-      <Select sort={sort} onChangeSort={onChangeSort} />
+      {/* Don't show isLoading indicator on initialization without data */}
+      <Select
+        isLoading={Boolean(data.length) && isLoading}
+        isDisabled={isLoading}
+        sort={sort}
+        onChangeSort={onChangeSort}
+      />
       <ul className="products-list" id="products-list">
         {data.map((value, index) => {
           return (

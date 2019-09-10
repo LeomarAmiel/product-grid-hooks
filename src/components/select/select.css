@@ -10,3 +10,9 @@
   padding: 25px;
   border-bottom: 1px solid black;
 }
+
+.inside-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
