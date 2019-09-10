@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { useSorting, useFetch, useDate } from "./hooks";
+import { useSorting, useFetch, useDate, useAds } from "./hooks";
 import { SORT_TYPES } from "./components/select/select.types";
 import { Ads, Loading, ProductItem, Select } from "./components";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState(1);
+  const { ads } = useAds(page);
   const { sort, onChangeSort } = useSorting(SORT_TYPES.UNSORTED);
   const { data, isLoading } = useFetch({
     sort,
@@ -30,9 +31,7 @@ function App() {
               {(index + 1) % 20 === 0 ? (
                 <Ads
                   id={value.id}
-                  src={`http://localhost:5000/ads/?r=${Math.floor(
-                    Math.random() * 1000
-                  )}`}
+                  src={`http://localhost:5000/ads/?r=${ads[(index + 1) / 20]}`}
                 />
               ) : null}
             </Fragment>
