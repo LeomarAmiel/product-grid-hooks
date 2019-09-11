@@ -27,4 +27,6 @@ I've finished a products grid using only hooks!
 
 ## How to run
 
-Run `yarn develop`
+1. Clone the project.
+2. Install dependencies with either yarn or npm
+3. Run `yarn develop`
